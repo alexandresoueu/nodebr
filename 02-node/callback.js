@@ -8,9 +8,11 @@ function getUser(callback) {
     }, 1000)
 }
 
-function getPhone(idUser, callback) {
+function getPhone(idUser, callback, callback3) {
     setTimeout(function () {
         
+        callback3('12', 14, '15')
+
         return callback(null, {
             phone: '888999',
             ddd: 55
@@ -64,6 +66,8 @@ getUser(function userResolve(err, user) {
               Phone: ${phone.ddd}-${phone.number}
              `)
         })
+    }, (um, dois, tres) => { 
+        console.log(um, dois, tres)
     })
 
 })
