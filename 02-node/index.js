@@ -1,11 +1,14 @@
-function getUser(callback) {
-    setTimeout(function () {
-        return callback(null, {
-            id: 1,
-            name: 'Nemo',
-            bornDate: new Date()
-        })
-    }, 1000)
+function getUser() {
+    return new Promise(function userResolve(resolve, reject) {
+        setTimeout(function () {
+            //return reject(new Error('DEU RUINZAUM'))
+            return resolve({
+                id: 1,
+                name: 'Nemo',
+                bornDate: new Date()
+            })
+        }, 1000)
+    })
 }
 
 function getPhone(idUser, callback) {
@@ -33,15 +36,15 @@ function userResolve(err, user) {
     console.log('USER >>>>', user)
 }
 
-function phoneResolve(err1, phone) {
-    console.log('PHONE >>>>>', phone)
-}
-
-function addressResolve(err2, address) {
-    console.log('ADDRESS ++++', address)
-}
-
-getUser(function userResolve(err, user) {
+const user = getUser()
+user
+    .then(result => {
+        console.log('Result', result)
+    })
+    .catch(error => {
+        console.log('USER Error!', error)
+    })
+/* getUser(function userResolve(err, user) {
     if (err) {
         console.error('ERROUUUUU O USER ', err)
         return
@@ -66,4 +69,4 @@ getUser(function userResolve(err, user) {
         })
     })
 
-})
+}) */
