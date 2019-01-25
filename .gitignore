@@ -1,3 +1,2 @@
-../.nvm/
-../.vscode/
-../install_nvm.sh
+.nvm/
+.vscode
