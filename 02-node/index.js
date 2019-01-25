@@ -34,38 +34,25 @@ function getAddress(idUser, callback) {
     })
 }
 
-const userPromise = getUser()
-userPromise
-    .then(user => {
-        return getPhone(user.id)
-            .then(resolvePhone = result => {
-                return {
-                    user: {
-                        name: user.name,
-                        id: user.id
-                    },
-                    phone: result
-                }
-            })
-    })
-    .then(result => {
-        const address = addressAsync(result.user.id)
-        return address.then(resolveAddress = resultAddress => {
-            return {
-                user: result.user,
-                phone: result.phone,
-                address: resultAddress
-            
-            }
-        })
-    })
-    .then(result => {
+main()
+async function main() {
+    try {
+        const user = await getUser()
+        const resultAll = await Promise.all([
+            getPhone(user.id),
+            addressAsync(user.id)
+        ])
+
+        const phone = resultAll[0]
+        const address = resultAll[1]
+
         console.log(`
-            Name: ${result.user.name},
-            Address: ${result.address.street}, ${result.address.number},
-            Phone: (${result.phone.ddd})${result.phone.number}
+            Name: ${user.name},
+            Phone:  ${phone.ddd},
+            Address: ${address.street}
         `)
-    })
-    .catch(function (error) {
-        console.log('USER Error!', error)
-    })
+    }
+    catch(error) {
+        console.error('WE HAVE A PROBLEM', error)
+    }
+}
