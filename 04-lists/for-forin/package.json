@@ -1,0 +1,15 @@
+{
+  "name": "for-forin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Alexandre Oliveira <calexandredev@gmail.com> (https://alexandre-oliveira.esy.es/)",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
+}
