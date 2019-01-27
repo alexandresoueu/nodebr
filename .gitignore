@@ -1,2 +1,3 @@
 .nvm/
 .vscode
+node_modules/
