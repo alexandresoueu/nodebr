@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha -w"
   },
   "keywords": [],
   "author": "Alexandre Oliveira <calexandredev@gmail.com> (https://alexandre-oliveira.esy.es/)",

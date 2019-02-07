@@ -25,9 +25,16 @@ describe('Handler of Heroes', () => {
 
   it('Should register a Hero, using files', async () => {
     const expected = DEFAULT_ITEM_REGISTER
-    const result = await database.register(DEFAULT_ITEM_REGISTER)
+    //const result = await database.register(DEFAULT_ITEM_REGISTER)
     const [actual] = await database.list(DEFAULT_ITEM_REGISTER.id)
 
     deepEqual(actual, expected)
+  })
+
+  it('Should remove a hero for id', async () => {
+    const expected = true
+    const result = await database.remove(DEFAULT_ITEM_REGISTER.id)
+
+    deepEqual(result, expected)
   })
 })
