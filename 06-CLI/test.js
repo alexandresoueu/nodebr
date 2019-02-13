@@ -19,8 +19,9 @@ const DEFAULT_ITEM_UPDATE = {
 
 describe('Handler of Heroes', () => {
   beforeEach(async () => {
+    await database.remove()
     await database.register(DEFAULT_ITEM_REGISTER)
-    //await database.update(DEFAULT_ITEM_UPDATE)
+    await database.register(DEFAULT_ITEM_UPDATE)
   })
 
   it('Should search a Hero using file', async () => {
@@ -49,16 +50,14 @@ describe('Handler of Heroes', () => {
     const expected = {
       ...DEFAULT_ITEM_UPDATE,
       name: 'Gollum',
-      power: 'Ring'
-    }
-    
-    const newData = {
-      name: 'Gollum',
-      power: 'Ring'
+      power: 'Ring',
     }
 
-    await database.update(DEFAULT_ITEM_UPDATE.id, newData)
-    const [result] = await database.list(DEFAULT_ITEM_UPDATE.id)
+    await database.update(expected.id, {
+      name: expected.name,
+      power: expected.power,
+    })
+    const [result] = await database.list(expected.id)
 
     console.log('EXPECTED', expected)
     deepEqual(result, expected)
