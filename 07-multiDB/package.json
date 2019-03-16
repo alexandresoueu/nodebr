@@ -1,0 +1,12 @@
+{
+  "name": "07-multiDB",
+  "version": "1.0.0",
+  "description": "docker run \\     --name postgres \\     -p 5432:5432 \\     -e POSTGRES_USER=admin \\     -e POSTGRES_PASSWORD=senhaadmin \\     -e POSTGRES_DB=heroes \\      -d \\     postgres",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Alexandre Oliveira <calexandredev@gmail.com> (https://alexandre-oliveira.esy.es/)",
+  "license": "MIT"
+}
