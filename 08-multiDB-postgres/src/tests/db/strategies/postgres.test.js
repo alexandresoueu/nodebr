@@ -4,8 +4,8 @@ const Context = require('../../../db/strategies/base/contextStrategy')
 
 const context = new Context(new Postgres())
 const MOCK_HERO_REGISTER = {
-  names: 'Robin',
-  power: 'Fury'
+  names: 'Maori',
+  power: 'Bichinho'
 }
 
 describe('Postgres Strategy', function() {
@@ -20,6 +20,12 @@ describe('Postgres Strategy', function() {
 
   it('To Register', async function() {
     const result = await context.create(MOCK_HERO_REGISTER)
+    delete result.id 
+    assert.deepEqual(result, MOCK_HERO_REGISTER)
+  })
+
+  it('Listing', async function() {
+    const [result] = await context.read({ names: MOCK_HERO_REGISTER.names})
     delete result.id 
     assert.deepEqual(result, MOCK_HERO_REGISTER)
   })
