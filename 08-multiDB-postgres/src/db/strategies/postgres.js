@@ -58,6 +58,11 @@ class PostgresDB extends ICrud {
     return r
   }
 
+  async delete(id) {
+    const query = id ? { id } : {}
+    return this._heroesDB.destroy({ where: query })
+  }
+
   async connect() {
     this._driver = new Sequelize(
       'heroes',

@@ -17,6 +17,7 @@ describe('Postgres Strategy', function() {
   this.timeout(Infinity)
   this.beforeAll(async function() {
     await context.connect()
+    await context.delete()
     await context.create(MOCK_HERO_UPDATE)
   })
   it('PostgresSQL Connection', async function() {
@@ -46,5 +47,11 @@ describe('Postgres Strategy', function() {
     const [itemUpdated] = await context.read({ id: itemUpdate.id })
     assert.deepEqual(result, 1)
     assert.deepEqual(itemUpdated.names, newItem.names)
+  })
+  it('Remove to id', async function() {
+    const [item] = await context.read({})
+    const result = await context.delete(item.id)
+
+    assert.deepEqual(result, 1)
   })
 })
