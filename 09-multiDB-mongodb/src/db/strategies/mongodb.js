@@ -1,13 +1,68 @@
 const ICrud = require('./interface/InterfaceCrud')
+const Mongoose = require('mongoose')
+const STATUS = {
+  0: 'Disconnected',
+  1: 'Connected',
+  2: 'Connecting',
+  3: 'Disconnecting'
+}
 
 class MongoDB extends ICrud {
   constructor() {
     super()
+    this._heroes = null
+    this._driver = null
   }
- 
-  create(item) {
-    console.log('The item has saved in MONGODB...........')
-  }
- }
 
- module.exports = MongoDB
+  async isConnected() {
+    const state = STATUS[this._driver.readyState]
+    if(state === 'Connected') return state;
+
+    if(state !== 'Connecting') return state
+    await new Promise(resolve => setTimeout(resolve, 1500))
+    return STATUS[this._driver.readyState]
+  }
+
+  defineModel() {
+    heroSchema = new Mongoose.Schema({
+      names: {
+        type: String,
+        required: true,
+      },
+      power: {
+        type: String,
+        required: true,
+      },
+      insertedAt: {
+        type: Date,
+        default: new Date(),
+      }
+    })
+
+    this._heroes = Mongoose.model('hero', heroSchema)
+  }
+
+  connect() {
+    const Mongoose = require('mongoose')
+    Mongoose.connect('mongodb+srv://alexandresoueu:xapo1411@cluster0-qy7bl.mongodb.net/heroes',
+    
+      { useNewUrlParser: true }, function (error) {
+        if (!error) return
+        console.log('Fail Connection', error)
+      })
+
+    const connection = Mongoose.connection
+    this._driver = connection
+    connection.once('open', () => console.log('database is running.....'))
+  }
+
+  async create(item) {
+    const resultRegister = await model.create({
+      names: 'Junior',
+      power: 'Turtle'
+    })
+    console.log('Result Register: ', resultRegister)
+  }
+}
+
+module.exports = MongoDB

@@ -19,3 +19,32 @@ Mongoose.connect('mongodb+srv://alexandresoueu:xapo1411@cluster0-qy7bl.mongodb.n
    * 2: Connecting
    * 3: Disconecting
    */
+
+  const heroSchema = new Mongoose.Schema({
+    names: {
+      type: String,
+      required: true,
+    },
+    power: {
+      type: String,
+      required: true,
+    },
+    insertedAt: {
+      type: Date,
+      default: new Date(),
+    }
+  })
+
+  const model = Mongoose.model('hero', heroSchema)
+
+  async function main() {
+    const resultRegister = await model.create({
+      names: 'Nemo',
+      power: 'Glu Glub'
+    })
+    console.log('Result Register: ', resultRegister)
+
+    const listItens = await model.find()
+    console.log('List Itens: ', listItens)
+  }
+  main()
