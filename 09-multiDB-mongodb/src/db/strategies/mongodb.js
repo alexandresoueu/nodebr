@@ -53,7 +53,7 @@ class MongoDB extends ICrud {
 
     const connection = Mongoose.connection
     this._driver = connection
-    connection.once('open', () => console.log('database is running.....'))
+    connection.once('open', () => console.log('MONGO database is running.....'))
 
     this.defineModel()
   }
@@ -64,6 +64,11 @@ class MongoDB extends ICrud {
 
   read(item, skip=0, limit=10) {
     return this._heroes.find(item).skip(skip).limit(limit)
+  }
+
+  update(id, item) {
+    console.log('ID: ', id)
+    return this._heroes.updateOne({ _id: id }, { $set: item })
   }
 }
 

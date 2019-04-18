@@ -12,12 +12,21 @@ const MOCK_HERO_DEFAULT = {
   power: 'Buscar conhecimento'
 }
 
+const MOCK_HERO_UPDATE = {
+  names: `Zaira -- ${Date.now()}`,
+  power: 'Bit'
+}
+
+let MOCK_HERO_ID = ''
+
 const context = new Context(new MongoDB())
 
 describe('MongoDB suit tests', function () {
   this.beforeAll(async () => {
     await context.connect()
     await context.create(MOCK_HERO_DEFAULT)
+    const result = await context.create(MOCK_HERO_UPDATE)
+    MOCK_HERO_ID = result._id
   })
   it('Verify the connection', async () => {
     const result = await context.isConnected()
@@ -39,5 +48,13 @@ describe('MongoDB suit tests', function () {
     }
 
     assert.deepEqual(result, MOCK_HERO_DEFAULT)
+  })
+
+  it('Update data', async () => {
+    const result = await context.update(MOCK_HERO_ID, {
+      names: 'Kim Jung Un'
+    })
+
+    assert.deepEqual(result.nModified, 1)
   })
 })  
