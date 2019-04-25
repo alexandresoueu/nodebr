@@ -57,4 +57,10 @@ describe('MongoDB suit tests', function () {
 
     assert.deepEqual(result.nModified, 1)
   })
+
+  it('Delete data', async () => {
+    const result = await context.delete(MOCK_HERO_ID)
+
+    assert.deepEqual(result.n, 1)
+  })
 })  
