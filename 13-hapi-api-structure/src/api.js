@@ -21,6 +21,7 @@ async function main() {
   
   await app.start()
   console.log('Server running at port ==>> ', app.info.port)
+  return app
 }
 
 module.exports = main()
