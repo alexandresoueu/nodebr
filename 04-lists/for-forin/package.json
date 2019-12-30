@@ -10,6 +10,6 @@
   "author": "Alexandre Oliveira <calexandredev@gmail.com> (https://alexandre-oliveira.esy.es/)",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.18.0"
+    "axios": "^0.18.1"
   }
 }
